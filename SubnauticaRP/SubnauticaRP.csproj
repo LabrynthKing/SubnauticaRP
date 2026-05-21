@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
+        <AssemblyName>SubnauticaRP</AssemblyName>
+        <Version>1.0.0</Version>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <LangVersion>11</LangVersion>
+        <RootNamespace>SubnauticaRP</RootNamespace>
+
+        <RestoreAdditionalProjectSources>
+            https://api.nuget.org/v3/index.json;
+            https://nuget.bepinex.dev/v3/index.json;
+        </RestoreAdditionalProjectSources>
+
+        <BepInExPluginGuid>com.labrynthking.subnauticarp</BepInExPluginGuid>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BepInEx.Analyzers" PrivateAssets="all" Version="1.*" />
+        <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+        <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
+        <PackageReference Include="UnityEngine.Modules" IncludeAssets="compile" Version="2019.4.36" />
+        <PackageReference Include="Unity.InputSystem" IncludeAssets="compile" Version="1.4.1" />
+        <PackageReference Include="Subnautica.GameLibs" Version="82304.0.0-r.0" />
+        <PackageReference Include="PolySharp" Version="1.15.0" />
+        <PackageReference Include="Subnautica.Nautilus" PrivateAssets="all" Version="1.*-*" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="all" Version="1.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="RichPresenceAPI">
+            <SpecificVersion>False</SpecificVersion>
+            <HintPath>lib\RichPresenceAPI.dll</HintPath>
+            <Private>True</Private>
+        </Reference>
+
+        <Reference Include="DiscordRPC">
+            <SpecificVersion>False</SpecificVersion>
+            <HintPath>lib\RichPresenceAPI\DiscordRPC.dll</HintPath>
+            <Private>True</Private>
+        </Reference>
+
+        <None Update="lib\RichPresenceAPI\NativeNamedPipe.dll">
+            <Link>RichPresenceAPI\NativeNamedPipe.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="lib\RichPresenceAPI\Newtonsoft.Json.dll">
+            <Link>RichPresenceAPI\Newtonsoft.Json.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <Target AfterTargets="PostBuildEvent" Name="CleanupMoveAssemblies">
+        <Message Importance="High" Text="[Post-Build] Packing RichPresenceAPI files into the nested layout..." />
+
+        <MakeDir Condition="!Exists('$(TargetDir)RichPresenceAPI')" Directories="$(TargetDir)RichPresenceAPI" />
+
+        <Move ContinueOnError="true" DestinationFolder="$(TargetDir)RichPresenceAPI\" OverwriteReadOnlyFiles="true" SourceFiles="$(TargetDir)RichPresenceAPI.dll" />
+        <Move ContinueOnError="true" DestinationFolder="$(TargetDir)RichPresenceAPI\" OverwriteReadOnlyFiles="true" SourceFiles="$(TargetDir)DiscordRPC.dll" />
+    </Target>
+
+    <ItemGroup>
+        <Folder Include="lib\" />
+    </ItemGroup>
+</Project>

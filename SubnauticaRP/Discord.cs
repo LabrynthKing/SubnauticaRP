@@ -160,7 +160,7 @@ public class Discord
                 presence.Assets.LargeImageText = "ALW@Y$ W@TCHING";
                 presence.Assets.SmallImageKey = "eyes";
                 presence.Assets.SmallImageText = "WOAH LOOK THAT BIG LEVIATHAN, IT HAS 3 EYES";
-                break;
+                return;
             }
             case "generatorroom"
                 : // if (GeneratorRoomAmbientSound.main && GeneratorRoomAmbientSound.main.isPlayerInside) { return "generatorRoom"; }
@@ -168,7 +168,7 @@ public class Discord
                 presence.Details = "Fixing The Aurora";
                 presence.Assets.LargeImageKey = "aurora";
                 presence.Assets.LargeImageText = "AHHH RADIATION HELPPP";
-                break;
+                return;
             }
             case "crashedship"
                 : // if (CrashedShipAmbientSound.main && CrashedShipAmbientSound.main.isPlayerInside) { return "crashedShip"; }
@@ -176,20 +176,22 @@ public class Discord
                 presence.Details = "Exploring The Aurora";
                 presence.Assets.LargeImageKey = "aurora";
                 presence.Assets.LargeImageText = "Where Did The Captain Go??";
+                return;
+            }
+            case "lifepod":
+            {
+                presence.Details = "Chilling In The Lifepod";
+                presence.Assets.LargeImageKey = "lifepod";
+                presence.Assets.LargeImageText = "Fabricating Atomic Weapons";
+                presence.Assets.SmallImageKey = "room";
+                presence.Assets.SmallImageText = "A Knife And A Stasis Rifle Is All U Need";
                 break;
             }
-            case not null when biomeString.Contains("safeshallows"):
+            case "precursor":
             {
-                presence.Details = BiomeDetails("Safe Shallows");
-                presence.Assets.LargeImageKey = "safeshallows";
-                presence.Assets.LargeImageText = "YAY I AM SAFE (for now)";
-                break;
-            }
-            case not null when biomeString.Contains("bloodkelp"):
-            {
-                presence.Details = BiomeDetails("Blood Kelp");
-                presence.Assets.LargeImageKey = "bloodkelp";
-                presence.Assets.LargeImageText = "Mr. Crabs? OH SHI ITS AN EMP-";
+                presence.Details = "At A Precursor Facility";
+                presence.Assets.LargeImageKey = "precursor";
+                presence.Assets.LargeImageText = "These Guys Sure Loved Green Huh?";
                 break;
             }
             case "<unknown>":
@@ -199,18 +201,14 @@ public class Discord
                 presence.Details = BiomeDetails("Exploring An Unknown Biome...");
                 presence.Assets.LargeImageKey = "unknown";
                 presence.Assets.LargeImageText = "S@VE MEEE$$$";
-                break;
-            }
-            default:
-            {
-                presence.Details = BiomeDetails(char.ToUpper(biomeString[0]) + biomeString[1..]);
-                presence.Assets.LargeImageText = "I C@N H$@R TH$IR V0IC$E$$";
-                break;
+                return;
             }
         }
+
+        BiomeMap.MapBiome(presence, biomeString, BiomeDetails);
     }
 
-    // TODO: Add More Vehicles Support
+    // TODO: Add More Vehicles Support And Use VehicleMap Kinda Class IDK
     private static void AddVehicleInfo(RichPresence presence)
     {
         var vehicle = Player.main.GetVehicle().GetType().Name.ToLower();
@@ -231,18 +229,13 @@ public class Discord
                 presence.Assets.SmallImageText = "Reaper's Lunch";
                 break;
             }
+            // I Need To Get Permission To Add Support For These
+            /*
             case "blossom":
             {
                 presence.State = VehicleState("Blossom");
                 presence.Assets.SmallImageKey = "blossom";
                 presence.Assets.SmallImageText = "Hypnotizing Fishes";
-                break;
-            }
-            case "archon":
-            {
-                presence.State = VehicleState("Archon");
-                presence.Assets.SmallImageKey = "archon";
-                presence.Assets.SmallImageText = "Rich People Be Like:-";
                 break;
             }
             case "beluga":
@@ -252,18 +245,26 @@ public class Discord
                 presence.Assets.SmallImageText = "CaseOh Of Submarines";
                 break;
             }
-            case "echelon":
-            {
-                presence.State = VehicleState("Echelon");
-                presence.Assets.SmallImageKey = "echelon";
-                presence.Assets.SmallImageText = "I Am SPEED";
-                break;
-            }
             case "hydra":
             {
                 presence.State = VehicleState("Hydra");
                 presence.Assets.SmallImageKey = "hydra";
                 presence.Assets.SmallImageText = "The VOID Is CALLING";
+                break;
+            }
+            */
+            case "archon":
+            {
+                presence.State = VehicleState("Archon");
+                presence.Assets.SmallImageKey = "archon";
+                presence.Assets.SmallImageText = "Rich People Be Like:-";
+                break;
+            }
+            case "echelon":
+            {
+                presence.State = VehicleState("Echelon");
+                presence.Assets.SmallImageKey = "echelon";
+                presence.Assets.SmallImageText = "I Am SPEED";
                 break;
             }
             default:
@@ -300,7 +301,7 @@ public class Discord
 
     private static string BiomeDetails(string biomeString, bool deep = false)
     {
-        return deep ? $"Exploring {biomeString} Of The Deep Depths" : $"Exploring {biomeString}";
+        return deep ? $"Exploring The {biomeString} Of The Deep Depths" : $"Exploring The {biomeString}";
     }
 
     public void Shutdown()

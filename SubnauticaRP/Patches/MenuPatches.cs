@@ -2,6 +2,7 @@ using HarmonyLib;
 
 namespace SubnauticaRP.Patches;
 
+// TBH This Was Made Mainly B/C I Wanted To See How Harmony Works
 [HarmonyPatch(typeof(MainMenuController))]
 public static class MenuPatches
 {

@@ -14,6 +14,9 @@
         </RestoreAdditionalProjectSources>
 
         <BepInExPluginGuid>com.labrynthking.subnauticarp</BepInExPluginGuid>
+        <Authors>LabrynthKing</Authors>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/LabrynthKing/SubnauticaRP</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>

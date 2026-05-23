@@ -3,6 +3,7 @@ using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 using Nautilus.Handlers;
+using Nautilus.Utility.ModMessages;
 using UnityEngine;
 
 namespace SubnauticaRP;
@@ -24,6 +25,8 @@ public class Plugin : BaseUnityPlugin
     {
         Logger = base.Logger;
 
+        ModMessageSystem.SendGlobal("FindMyUpdates",
+            "https://raw.githubusercontent.com/LabrynthKing/SubnauticaRP/refs/heads/main/version.json");
         ModConfig = OptionsPanelHandler.RegisterModOptions<Config>();
 
         Discord = new Discord();

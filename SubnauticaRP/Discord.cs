@@ -10,8 +10,6 @@ public class Discord
     private DiscordRpcClient _client;
     private bool _hasPresence;
 
-    private float _timeSinceRefresh;
-
     public void Initialize()
     {
         var appId = string.IsNullOrWhiteSpace(Plugin.ModConfig.AppId)
@@ -47,7 +45,7 @@ public class Discord
         }
     }
 
-    public void UpdatePresence(float deltaTime)
+    public void UpdatePresence(bool runMainMenu)
     {
         if (_client is null) return;
 
@@ -62,9 +60,19 @@ public class Discord
             return;
         }
 
-        if (Player.main is null || DayNightCycle.main is null)
+        if (runMainMenu || Player.main is null || DayNightCycle.main is null)
         {
-            MenuPresence();
+            _client?.SetPresence(new RichPresence
+            {
+                Details = "In Main Menu",
+                State = "Thinking About Life Choices...",
+                Assets = new Assets
+                {
+                    LargeImageText = "Press Play Already!"
+                },
+                Timestamps = _sessionTime
+            });
+            _hasPresence = true;
 
             return;
         }
@@ -75,11 +83,11 @@ public class Discord
             Assets = new Assets()
         };
 
-        AddBiomeInfo(presence);
+        var addedSmallImage = AddBiomeInfo(presence);
 
         if (Player.main.GetVehicle() is not null)
         {
-            AddVehicleInfo(presence);
+            AddVehicleInfo(presence, addedSmallImage);
         }
         else if (Player.main.GetCurrentSub() is not null)
         {
@@ -88,13 +96,20 @@ public class Discord
             {
                 presence.Details = "In A Base";
                 presence.State = $"Chilling At {Player.main.cachedDepth}m";
-                presence.Assets.SmallImageKey = "room";
-                presence.Assets.SmallImageText = "Ghost Leviathans Watch Me Sleep";
+                if (!addedSmallImage)
+                {
+                    presence.Assets.SmallImageKey = "room";
+                    presence.Assets.SmallImageText = "Ghost Leviathans Watch Me Sleep";
+                }
             }
             else if (Player.main.GetCurrentSub().isCyclops)
             {
-                presence.Assets.SmallImageKey = "cyclops";
-                presence.Assets.SmallImageText = "One Eye";
+                if (!addedSmallImage)
+                {
+                    presence.Assets.SmallImageKey = "cyclops";
+                    presence.Assets.SmallImageText = "One Eye";
+                }
+
                 presence.State = VehicleState("Cyclops");
             }
         }
@@ -104,37 +119,33 @@ public class Discord
                                                          .Run)) // I Won't Check Mech Cuz I Think It Should Be Caught Already
         {
             presence.State = "Walking Across The Mountains";
-            presence.Assets.SmallImageKey = "fins";
-            presence.Assets.SmallImageText = "Finally! LAND! Wait What Do You Mean There's Killer Cra- AHHHHH";
+            if (!addedSmallImage)
+            {
+                presence.Assets.SmallImageKey = "fins";
+                presence.Assets.SmallImageText = "Finally! LAND! Wait What Do You Mean There's Killer Cra- AHHHHH";
+            }
         }
         else
         {
             if (Player.main.motorMode == Player.MotorMode.Seaglide)
             {
                 presence.State = $"Seagliding Across The Sea At {Player.main.cachedDepth}m";
-                presence.Assets.SmallImageKey = "seaglide";
-                presence.Assets.SmallImageText = "Gotta Go Fast!";
+                if (!addedSmallImage)
+                {
+                    presence.Assets.SmallImageKey = "seaglide";
+                    presence.Assets.SmallImageText = "Gotta Go Fast!";
+                }
             }
             else
             {
                 presence.State = $"Swimming Across The Sea At {Player.main.cachedDepth}m";
-                presence.Assets.SmallImageKey = "fins";
-                presence.Assets.SmallImageText = "OXYGEN";
+                if (!addedSmallImage)
+                {
+                    presence.Assets.SmallImageKey = "fins";
+                    presence.Assets.SmallImageText = "OXYGEN";
+                }
             }
         }
-
-        if (Plugin.ModConfig.EnableForceRefresh)
-        {
-            _timeSinceRefresh += deltaTime;
-            if (_timeSinceRefresh > Plugin.ModConfig.ForceRefreshTimer)
-            {
-                Plugin.Logger.LogInfo("Forcing Discord Refresh...");
-                _timeSinceRefresh = 0f;
-
-                presence.State = "\u200B";
-            }
-        }
-
 
         if (!Plugin.ModConfig.EnableHoverText)
         {
@@ -146,10 +157,9 @@ public class Discord
         _hasPresence = true;
     }
 
-    // TODO: Add All Biomes
-    private static void AddBiomeInfo(RichPresence presence)
+    private static bool AddBiomeInfo(RichPresence presence)
     {
-        var biomeString = Player.main.GetBiomeString().ToLower();
+        var biomeString = Player.main.GetBiomeString().ToLower().Trim();
 
         switch (biomeString)
         {
@@ -160,7 +170,7 @@ public class Discord
                 presence.Assets.LargeImageText = "ALW@Y$ W@TCHING";
                 presence.Assets.SmallImageKey = "eyes";
                 presence.Assets.SmallImageText = "WOAH LOOK THAT BIG LEVIATHAN, IT HAS 3 EYES";
-                return;
+                return true;
             }
             case "generatorroom"
                 : // if (GeneratorRoomAmbientSound.main && GeneratorRoomAmbientSound.main.isPlayerInside) { return "generatorRoom"; }
@@ -168,7 +178,7 @@ public class Discord
                 presence.Details = "Fixing The Aurora";
                 presence.Assets.LargeImageKey = "aurora";
                 presence.Assets.LargeImageText = "AHHH RADIATION HELPPP";
-                return;
+                return false;
             }
             case "crashedship"
                 : // if (CrashedShipAmbientSound.main && CrashedShipAmbientSound.main.isPlayerInside) { return "crashedShip"; }
@@ -176,7 +186,7 @@ public class Discord
                 presence.Details = "Exploring The Aurora";
                 presence.Assets.LargeImageKey = "aurora";
                 presence.Assets.LargeImageText = "Where Did The Captain Go??";
-                return;
+                return false;
             }
             case "lifepod":
             {
@@ -185,14 +195,14 @@ public class Discord
                 presence.Assets.LargeImageText = "Fabricating Atomic Weapons";
                 presence.Assets.SmallImageKey = "room";
                 presence.Assets.SmallImageText = "A Knife And A Stasis Rifle Is All U Need";
-                break;
+                return true;
             }
             case "precursor":
             {
                 presence.Details = "At A Precursor Facility";
                 presence.Assets.LargeImageKey = "precursor";
                 presence.Assets.LargeImageText = "These Guys Sure Loved Green Huh?";
-                break;
+                return false;
             }
             case "<unknown>":
             case "unassigned":
@@ -201,101 +211,26 @@ public class Discord
                 presence.Details = BiomeDetails("Exploring An Unknown Biome...");
                 presence.Assets.LargeImageKey = "unknown";
                 presence.Assets.LargeImageText = "S@VE MEEE$$$";
-                return;
+                return false;
             }
         }
 
         BiomeMap.MapBiome(presence, biomeString, BiomeDetails);
+        return false;
     }
 
-    // TODO: Add More Vehicles Support And Use VehicleMap Kinda Class IDK
-    private static void AddVehicleInfo(RichPresence presence)
+    private static void AddVehicleInfo(RichPresence presence, bool addedSmallImage)
     {
-        var vehicle = Player.main.GetVehicle().GetType().Name.ToLower();
+        var vehicle = Player.main.GetVehicle().GetType().Name.ToLower().Trim();
 
-        switch (vehicle)
-        {
-            case "exosuit":
-            {
-                presence.State = VehicleState("Prawn Suit");
-                presence.Assets.SmallImageKey = "exosuit";
-                presence.Assets.SmallImageText = "SpiderMan With A Drill";
-                break;
-            }
-            case "seamoth":
-            {
-                presence.State = VehicleState("Seamoth");
-                presence.Assets.SmallImageKey = "seamoth";
-                presence.Assets.SmallImageText = "Reaper's Lunch";
-                break;
-            }
-            // I Need To Get Permission To Add Support For These
-            /*
-            case "blossom":
-            {
-                presence.State = VehicleState("Blossom");
-                presence.Assets.SmallImageKey = "blossom";
-                presence.Assets.SmallImageText = "Hypnotizing Fishes";
-                break;
-            }
-            case "beluga":
-            {
-                presence.State = VehicleState("Beluga");
-                presence.Assets.SmallImageKey = "beluga";
-                presence.Assets.SmallImageText = "CaseOh Of Submarines";
-                break;
-            }
-            case "hydra":
-            {
-                presence.State = VehicleState("Hydra");
-                presence.Assets.SmallImageKey = "hydra";
-                presence.Assets.SmallImageText = "The VOID Is CALLING";
-                break;
-            }
-            */
-            case "archon":
-            {
-                presence.State = VehicleState("Archon");
-                presence.Assets.SmallImageKey = "archon";
-                presence.Assets.SmallImageText = "Rich People Be Like:-";
-                break;
-            }
-            case "echelon":
-            {
-                presence.State = VehicleState("Echelon");
-                presence.Assets.SmallImageKey = "echelon";
-                presence.Assets.SmallImageText = "I Am SPEED";
-                break;
-            }
-            default:
-            {
-                presence.State = VehicleState($"{vehicle}");
-                presence.Assets.SmallImageKey = "unknown";
-                presence.Assets.SmallImageText = $"{vehicle}";
-                break;
-            }
-        }
-    }
-
-    public void MenuPresence()
-    {
-        _client?.SetPresence(new RichPresence
-        {
-            Details = "In Main Menu",
-            State = "Thinking About Life Choices...",
-            Assets = new Assets
-            {
-                LargeImageText = "Press Play Already!"
-            },
-            Timestamps = _sessionTime
-        });
+        VehicleMap.MapVehicle(presence, vehicle, addedSmallImage, VehicleState);
     }
 
     // This Only Here Cuz I Am Too Lazy
     private static string VehicleState(string vehicle)
     {
         return Player.main.isPiloting
-            ? $"Piloting {vehicle} At {Player.main.cachedDepth}m"
+            ? $"Piloting The {vehicle} At {Player.main.cachedDepth}m"
             : $"Chilling In {vehicle} At {Player.main.cachedDepth}m";
     }
 

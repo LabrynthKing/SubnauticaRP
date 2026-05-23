@@ -1,9 +1,9 @@
 namespace SubnauticaRP;
 
-public class BiomeData
+public readonly struct BiomeData
 {
-    public string Details { get; set; }
-    public string LargeImageKey { get; set; }
-    public string LargeImageText { get; set; }
-    public bool IsDeep { get; set; } = false;
+    public required string Details { get; init; }
+    public required string LargeImageKey { get; init; }
+    public required string LargeImageText { get; init; }
+    public required bool IsDeep { get; init; }
 }

@@ -10,6 +10,6 @@ public static class MenuPatches
     [HarmonyPostfix]
     public static void PostfixMenuStart()
     {
-        if (Plugin.Discord is not null) Plugin.Discord.MenuPresence();
+        if (Plugin.Discord is not null) Plugin.Discord.UpdatePresence(true);
     }
 }

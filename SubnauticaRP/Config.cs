@@ -11,17 +11,15 @@ public class Config : ConfigFile
     // No Text Input Yet Lol
     public string AppId = "1506535741109571705";
 
-    [Toggle("Enable Force Refresh", Order = 3)]
-    public bool EnableForceRefresh;
-
-    [Toggle("Enable Hover Text", Order = 2)]
+    [Toggle("Enable Hover Text", Order = 2,
+        Tooltip = "Enables Or Disables The Image Hover Texts (In Case You Don't Like Them)")]
     public bool EnableHoverText;
 
-    [Toggle("Enable SRP", Order = 1)] public bool EnableSRP;
+    [Toggle("Enable SRP", Order = 1, Tooltip = "Enables Or Disables The Rich Presence")]
+    public bool EnableSRP;
 
-    [Slider("Force Refresh Timer", 20, 300, DefaultValue = 60, Format = "{0:F2}", Order = 5)]
-    public int ForceRefreshTimer;
-
-    [Slider("RPC Update Interval", 0.1f, 60.0f, DefaultValue = 5.0f, Format = "{0:F2}", Order = 4)]
+    [Slider("RPC Update Interval", 1f, 60f, DefaultValue = 15f, Format = "{0:F2}", Order = 3,
+        Tooltip =
+            "Sets The Update Interval Of The Rich Presence (RECOMMENDED 15 SECONDS BECAUSE OF DISCORD RATE LIMITS)")]
     public float RPCUpdateInterval;
 }

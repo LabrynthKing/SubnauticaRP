@@ -54,7 +54,7 @@
 ## TODO:-
 
 - Add Support For More Modded Vehicles (Need Permission From Original Devs Wherever Applicable)
-- Fix The Presence Getting Stuck Sometimes
+- ~~Fix The Presence Getting Stuck Sometimes~~ [Discord's Fault Not Mine LOL]
 - Add Support For Custom Biomes
 - Potentially Add Support For Random/Multiple Hover Texts For Different Situations
 - Maybe Add Support For Detection Of Big Mods Like TRP, The Prototype Expansion, Titan's Wall etc.

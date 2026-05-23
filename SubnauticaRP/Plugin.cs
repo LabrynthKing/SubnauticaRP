@@ -37,10 +37,12 @@ public class Plugin : BaseUnityPlugin
     {
         var deltaTime = Time.deltaTime;
         _timer += deltaTime;
-        if (!(_timer >= ModConfig.RPCUpdateInterval)) return;
 
-        _timer = 0f;
-        Discord.UpdatePresence(deltaTime);
+        if (_timer >= ModConfig.RPCUpdateInterval)
+        {
+            _timer = 0f;
+            Discord.UpdatePresence(false);
+        }
     }
 
     public void OnDestroy()

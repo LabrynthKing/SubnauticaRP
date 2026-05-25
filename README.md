@@ -48,7 +48,7 @@
 1. Go To Your `Subnautica/BepInEx/config/SubnauticaRP` Folder [If It's Not There, Run The Game Once]
 2. Open The File Named `hoverTexts.json` Using Any Text Editor
 3. It Should Be In This Format
-```json
+```json5
  {
     "Name": "lifepod", // Name Of The Situation
     "LargeImageText": [ // Large Image Text [If Applicable]

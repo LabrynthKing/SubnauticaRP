@@ -9,4 +9,13 @@
 - Fix Wrong Small Image/Text In Certain Situations
 - Fix Menu Presence Still Showing Even If SRP Was Disabled In Settings
 - Changed Default Value Of RPCUpdateInterval To 15 Seconds (As Per Discord's Rate Limits)
-- Internal Code Changes Fixups & Additions
+- Internal Code Changes, Fixups & Additions
+
+## Version 1.1.0:-
+
+- Added Randomly Changing Hover Texts
+- Added A Way To Customize Hover Texts Through `hoverTexts.json`
+- Added A Lot MORE Hover Texts For Different Situations
+- Added Support For [Blossom](https://www.nexusmods.com/subnautica/mods/1977) Submarine [Thanks [Royalty](https://www.nexusmods.com/profile/XTXPRX)]
+- Added `EnableDeepDepths` Setting In The Config Menu [For Those Who Didn't Like The "Of The Deep Depths" Text]
+- Internal Code Changes, Fixups & Additions

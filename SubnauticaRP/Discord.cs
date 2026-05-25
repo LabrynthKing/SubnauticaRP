@@ -1,6 +1,8 @@
 using System;
 using DiscordRPC;
 using RichPresenceAPI;
+using SubnauticaRP.Maps;
+using static SubnauticaRP.Maps.HoverMap;
 
 namespace SubnauticaRP;
 
@@ -62,7 +64,7 @@ public class Discord
 
         if (runMainMenu || Player.main is null || DayNightCycle.main is null)
         {
-            _client?.SetPresence(new RichPresence
+            _client.SetPresence(new RichPresence
             {
                 Details = "In Main Menu",
                 State = "Thinking About Life Choices...",
@@ -99,7 +101,7 @@ public class Discord
                 if (!addedSmallImage)
                 {
                     presence.Assets.SmallImageKey = "room";
-                    presence.Assets.SmallImageText = "Ghost Leviathans Watch Me Sleep";
+                    presence.Assets.SmallImageText = GetRandomS("base");
                 }
             }
             else if (Player.main.GetCurrentSub().isCyclops)
@@ -107,7 +109,7 @@ public class Discord
                 if (!addedSmallImage)
                 {
                     presence.Assets.SmallImageKey = "cyclops";
-                    presence.Assets.SmallImageText = "One Eye";
+                    presence.Assets.SmallImageText = GetRandomS("cyclops");
                 }
 
                 presence.State = VehicleState("Cyclops");
@@ -122,7 +124,7 @@ public class Discord
             if (!addedSmallImage)
             {
                 presence.Assets.SmallImageKey = "fins";
-                presence.Assets.SmallImageText = "Finally! LAND! Wait What Do You Mean There's Killer Cra- AHHHHH";
+                presence.Assets.SmallImageText = GetRandomS("land");
             }
         }
         else
@@ -133,7 +135,7 @@ public class Discord
                 if (!addedSmallImage)
                 {
                     presence.Assets.SmallImageKey = "seaglide";
-                    presence.Assets.SmallImageText = "Gotta Go Fast!";
+                    presence.Assets.SmallImageText = GetRandomS("seaglide");
                 }
             }
             else
@@ -142,7 +144,7 @@ public class Discord
                 if (!addedSmallImage)
                 {
                     presence.Assets.SmallImageKey = "fins";
-                    presence.Assets.SmallImageText = "OXYGEN";
+                    presence.Assets.SmallImageText = GetRandomS("swim");
                 }
             }
         }
@@ -167,9 +169,9 @@ public class Discord
             {
                 presence.Details = "Observing The World";
                 presence.Assets.LargeImageKey = "observatory";
-                presence.Assets.LargeImageText = "ALW@Y$ W@TCHING";
+                presence.Assets.LargeImageText = GetRandomL("observe");
                 presence.Assets.SmallImageKey = "eyes";
-                presence.Assets.SmallImageText = "WOAH LOOK THAT BIG LEVIATHAN, IT HAS 3 EYES";
+                presence.Assets.SmallImageText = GetRandomS("observe");
                 return true;
             }
             case "generatorroom"
@@ -177,7 +179,7 @@ public class Discord
             {
                 presence.Details = "Fixing The Aurora";
                 presence.Assets.LargeImageKey = "aurora";
-                presence.Assets.LargeImageText = "AHHH RADIATION HELPPP";
+                presence.Assets.LargeImageText = GetRandomL("genroom");
                 return false;
             }
             case "crashedship"
@@ -185,23 +187,23 @@ public class Discord
             {
                 presence.Details = "Exploring The Aurora";
                 presence.Assets.LargeImageKey = "aurora";
-                presence.Assets.LargeImageText = "Where Did The Captain Go??";
+                presence.Assets.LargeImageText = GetRandomL("aurora");
                 return false;
             }
             case "lifepod":
             {
                 presence.Details = "Chilling In The Lifepod";
                 presence.Assets.LargeImageKey = "lifepod";
-                presence.Assets.LargeImageText = "Fabricating Atomic Weapons";
+                presence.Assets.LargeImageText = GetRandomL("lifepod");
                 presence.Assets.SmallImageKey = "room";
-                presence.Assets.SmallImageText = "A Knife And A Stasis Rifle Is All U Need";
+                presence.Assets.SmallImageText = GetRandomS("lifepod");
                 return true;
             }
             case "precursor":
             {
                 presence.Details = "At A Precursor Facility";
                 presence.Assets.LargeImageKey = "precursor";
-                presence.Assets.LargeImageText = "These Guys Sure Loved Green Huh?";
+                presence.Assets.LargeImageText = GetRandomL("precursor");
                 return false;
             }
             case "<unknown>":
@@ -210,7 +212,7 @@ public class Discord
             {
                 presence.Details = BiomeDetails("Exploring An Unknown Biome...");
                 presence.Assets.LargeImageKey = "unknown";
-                presence.Assets.LargeImageText = "S@VE MEEE$$$";
+                presence.Assets.LargeImageText = GetRandomL("unk");
                 return false;
             }
         }
@@ -236,7 +238,9 @@ public class Discord
 
     private static string BiomeDetails(string biomeString, bool deep = false)
     {
-        return deep ? $"Exploring The {biomeString} Of The Deep Depths" : $"Exploring The {biomeString}";
+        if (deep && Plugin.ModConfig.EnableDeepDepths) return $"Exploring The {biomeString} Of The Deep Depths";
+
+        return $"Exploring The {biomeString}";
     }
 
     public void Shutdown()

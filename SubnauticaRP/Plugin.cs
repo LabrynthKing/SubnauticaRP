@@ -4,6 +4,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using Nautilus.Handlers;
 using Nautilus.Utility.ModMessages;
+using SubnauticaRP.Utils;
 using UnityEngine;
 
 namespace SubnauticaRP;

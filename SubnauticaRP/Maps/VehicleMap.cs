@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DiscordRPC;
+using static SubnauticaRP.Maps.HoverMap;
 
-namespace SubnauticaRP;
+namespace SubnauticaRP.Maps;
 
-public class VehicleMap
+public static class VehicleMap
 {
     // Funni Typo So I Am Leaving It In
     // TODO: Add More Vehicles Support (Gotta Ask Authors Lol)
@@ -14,26 +15,29 @@ public class VehicleMap
         ["exosuit"] = new VehicleData
         {
             State = "Prawn Suit",
-            SmallImageKey = "exosuit",
-            SmallImageText = "SpiderMan With A Drill INCOMING!"
+            SmallImageKey = "exosuit"
         },
         ["seamoth"] = new VehicleData
         {
             State = "Seamoth",
-            SmallImageKey = "seamoth",
-            SmallImageText = "Reaper's Lunch"
+            SmallImageKey = "seamoth"
         },
+        // Thanks To AshenShade
         ["archon"] = new VehicleData
         {
             State = "Archon",
-            SmallImageKey = "archon",
-            SmallImageText = "Rich People Be Like:-"
+            SmallImageKey = "archon"
         },
         ["echelon"] = new VehicleData
         {
             State = "Echelon",
-            SmallImageKey = "echelon",
-            SmallImageText = "I Am SPEED!!"
+            SmallImageKey = "echelon"
+        },
+        // Thanks To Royalty For Permission
+        ["blossom"] = new VehicleData
+        {
+            State = "Blossom",
+            SmallImageKey = "blossom"
         }
     };
 
@@ -46,7 +50,7 @@ public class VehicleMap
             if (!addedSmallImage)
             {
                 presence.Assets.SmallImageKey = "unknown";
-                presence.Assets.SmallImageText = "What Is Bro Driving??";
+                presence.Assets.SmallImageText = GetRandomS("unkvehicle");
             }
 
             return;
@@ -56,7 +60,7 @@ public class VehicleMap
 
         if (data.Key != null)
         {
-            Apply(presence, data.Value, addedSmallImage, formatter);
+            Apply(presence, data.Key, data.Value, addedSmallImage, formatter);
             return;
         }
 
@@ -69,14 +73,14 @@ public class VehicleMap
         }
     }
 
-    private static void Apply(RichPresence presence, VehicleData data, bool addedSmallImage,
+    private static void Apply(RichPresence presence, string key, VehicleData data, bool addedSmallImage,
         Func<string, string> formatter)
     {
         presence.State = formatter(data.State);
         if (!addedSmallImage)
         {
             presence.Assets.SmallImageKey = data.SmallImageKey;
-            presence.Assets.SmallImageText = data.SmallImageText;
+            presence.Assets.SmallImageText = GetRandomS(key);
         }
     }
 }

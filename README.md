@@ -16,7 +16,7 @@
 
 - **(Funny) Random Hover Texts:** Multiple & Randomized Image Hover Text On Discord For All Different Types Of Situations (Mostly Unfunny Because I Am Unfunny ;( Lol)
 
-- **Customizable Hover Texts:** You Can Customize, Add Or Remove Hover Texts To Your Liking For Each Situtation!
+- **Customizable Hover Texts:** You Can Customize, Add Or Remove Hover Texts To Your Liking For Each Situation!
 
 - **Mod Manager Support:** Supports Vortex Mod Manager (This ain't even a feature bro)
 

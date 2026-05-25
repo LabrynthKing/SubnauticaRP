@@ -101,7 +101,7 @@
 
 - **[Subnautica Wiki](https://wiki.subnautica.com):** All Of The In-Game Images Have Been Sourced From The Wiki, And They Deserve All The Credit.
 - **[AshenShade](https://www.nexusmods.com/profile/AshenShade):** For The [Archon](https://www.nexusmods.com/subnautica/mods/2509) & [Echelon](https://www.nexusmods.com/subnautica/mods/2153) Submarine Mods
-- **[Mikjaw](https://www.nexusmods.com/profile/Mikjaw) & [Royalty]():** For The [Blossom](https://www.nexusmods.com/subnautica/mods/1977) Submarine Mod
+- **[Mikjaw](https://www.nexusmods.com/profile/Mikjaw) & [Royalty](https://www.nexusmods.com/profile/XTXPRX):** For The [Blossom](https://www.nexusmods.com/subnautica/mods/1977) Submarine Mod
 - **[Khaomi](https://github.com/Khaomi):** For Their [RichPresenceAPI](https://github.com/Khaomi/RichPresenceAPI)
 - **[Lachee](https://github.com/Lachee):** For Their [discord-rpc-csharp](https://github.com/Lachee/discord-rpc-csharp) & [unity-named-pipes](https://github.com/Lachee/unity-named-pipes)
 - **[The Nautilus Dev Team](https://www.nexusmods.com/subnautica/mods/1262):** For Their GREAT Library

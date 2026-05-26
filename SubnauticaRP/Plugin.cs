@@ -26,6 +26,8 @@ public class Plugin : BaseUnityPlugin
     {
         Logger = base.Logger;
 
+        LanguageHandler.RegisterLocalizationFolder();
+
         ModMessageSystem.SendGlobal("FindMyUpdates",
             "https://raw.githubusercontent.com/LabrynthKing/SubnauticaRP/refs/heads/main/version.json");
         ModConfig = OptionsPanelHandler.RegisterModOptions<Config>();

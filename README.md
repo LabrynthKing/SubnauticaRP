@@ -79,6 +79,13 @@
 
 **Note 3:** Updates May Or May Not Update The File Without Merging Changes (Untested) So Yeah Keep A Backup LOL
 
+## Localization:-
+
+- This Mod Supports Localization Through Nautilus' `LanguangeHandler`.
+- If You'd Like To Make A Localization For Your Language OR Install A Pre-Existing Localization For Your Language Then You Can Add A `LanguageName.json` File In Your `Subnautica/BepInEx/plugins/SubnauticaRP/Localization` Folder, Make Sure It Has The Same Format As The Pre-Exisiting `English.json` & Then You Can Edit The Text To Match Your Language.
+- Similarly, Hover Texts Can Also Be Localized By Creating A `hoverTexts_LanguageName.json` File In Your `Subnautica/BepInEx/config/SubnauticaRP` Folder, Make Sure It Has The Same Format & Version As The Original `hoverTexts.json` & Then You Can Edit The Text To Match Your Language.
+- You Can Even Add/Modify/Delete Texts For The Hover Texts Localization Depending On Your Choice Similar To The English Hover Texts File.
+
 ## Notes:-
 
 - This Is My First Ever Mod So Sorry If It's A Lil Buggy Lol

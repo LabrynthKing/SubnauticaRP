@@ -19,3 +19,13 @@
 - Added Support For [Blossom](https://www.nexusmods.com/subnautica/mods/1977) Submarine [Thanks [Royalty](https://www.nexusmods.com/profile/XTXPRX)]
 - Added `EnableDeepDepths` Setting In The Config Menu [For Those Who Didn't Like The "Of The Deep Depths" Text]
 - Internal Code Changes, Fixups & Additions
+
+## Version 1.1.5:-
+
+- Added Base Mod Localization Support
+- Added Hover Texts Localization Support
+- Added `English.json` As Default Localization & `hoverTexts.json` As Default Hover Texts
+- Fix hoverTexts.json Version Update Merging
+- Fix RPC Update Interval To Have 1.0f Steps
+- Fix Default Values In Config
+- Internal Code Changes, Fixups & Additions

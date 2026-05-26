@@ -14,29 +14,29 @@ public static class VehicleMap
     {
         ["exosuit"] = new VehicleData
         {
-            State = "Prawn Suit",
+            State = Language.main.Get("Prawn_Suit_Vehicle"),
             SmallImageKey = "exosuit"
         },
         ["seamoth"] = new VehicleData
         {
-            State = "Seamoth",
+            State = Language.main.Get("Seamoth_Vehicle"),
             SmallImageKey = "seamoth"
         },
         // Thanks To AshenShade
         ["archon"] = new VehicleData
         {
-            State = "Archon",
+            State = Language.main.Get("Archon_Vehicle"),
             SmallImageKey = "archon"
         },
         ["echelon"] = new VehicleData
         {
-            State = "Echelon",
+            State = Language.main.Get("Echelon_Vehicle"),
             SmallImageKey = "echelon"
         },
         // Thanks To Royalty For Permission
         ["blossom"] = new VehicleData
         {
-            State = "Blossom",
+            State = Language.main.Get("Blossom_Vehicle"),
             SmallImageKey = "blossom"
         }
     };
@@ -46,7 +46,7 @@ public static class VehicleMap
     {
         if (string.IsNullOrEmpty(vehicle))
         {
-            presence.State = formatter("Unknown Vehicle");
+            presence.State = formatter(Language.main.Get("Unknown Vehicle"));
             if (!addedSmallImage)
             {
                 presence.Assets.SmallImageKey = "unknown";

@@ -10,528 +10,9 @@ namespace SubnauticaRP.Maps;
 
 public static class HoverMap
 {
-    private const string CurrentVersion = "1.1.0";
-
-    #region DefaultData
-
-    private const string DefaultDataTemp = """
-                                           {
-                                             "Version": "1.1.0",
-                                             "Data": [
-                                               {
-                                                 "Name": "base",
-                                                 "SmallImageText": [
-                                                   "Ghost Leviathans Watch Me Sleep",
-                                                   "Home Sweet Home!",
-                                                   "Ocean Exploration? Nah Imma Settle",
-                                                   "HAHA REAPER CAN'T GET ME THROUGH THE WINDOW BLEHH"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "cyclops",
-                                                 "SmallImageText": [
-                                                   "One Eye",
-                                                   "AHEAD FLANK QUICK RUNNNNN",
-                                                   "Warning: Fire Detected!",
-                                                   "I May Be On Fire But This Music Goes HARD!!!",
-                                                   "Abandon Ship!"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "land",
-                                                 "SmallImageText": [
-                                                   "Finally! LAND! Wait What Do You Mean There's Killer Cra- AHHHHH",
-                                                   "Wait...THE OCEAN GAME HAS LAND??",
-                                                   "Woah So Many Trees!",
-                                                   "Time To Write H E L P On The Sand"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "seaglide",
-                                                 "SmallImageText": [
-                                                   "Gotta Go Fast!",
-                                                   "VROOMMMMMMMM",
-                                                   "Who Even Uses This Map Bro",
-                                                   "39.6km/h Max Speed? LESS GOO!!"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "swim",
-                                                 "SmallImageText": [
-                                                   "SWIM SWIM SWIM",
-                                                   "OXYGEN",
-                                                   "Gettin' My Feet Wet",
-                                                   "Bouta Win The Olympic Gold For Swimming"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "observe",
-                                                 "LargeImageText": [
-                                                   "ALW@Y$ W@TCHING",
-                                                   "Such A Beautiful World!",
-                                                   "Reaper Really Be Thinking He Can Break This Glass",
-                                                   "Feelin' Like The Watcher RN"
-                                                 ],
-                                                 "SmallImageText": [
-                                                   "WOAH LOOK THAT BIG LEVIATHAN, IT HAS 3 EYES",
-                                                   "Ah..So Peaceful",
-                                                   "I-Is That JOHN SUBNAUTICA???"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "genroom",
-                                                 "LargeImageText": [
-                                                   "AHHH RADIATION HELPPP",
-                                                   "Ow! Stop Biting Me!",
-                                                   "Extinction Event Avoided",
-                                                   "Erm..I Forgot To Bring My Repair Tool.."
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "aurora",
-                                                 "LargeImageText": [
-                                                   "Where'd The Captain Go???",
-                                                   "Alterrraaaa",
-                                                   "Yo Where My Crewmates At?",
-                                                   "Can I Steal This Gorge Toy? Thanks."
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "lifepod",
-                                                 "LargeImageText": [
-                                                   "Fabricating Atomic Weapons",
-                                                   "Why This Radio So Slow Bruhhhh",
-                                                   "So, Hypothecically, How Would I Make A Gun Mr. Fabricator?",
-                                                   "Glad I Didn't Fall In The Void"
-                                                 ],
-                                                 "SmallImageText": [
-                                                   "A Knife And A Stasis Rifle Is All U Need",
-                                                   "I Don't Wanna Go Out There's Scary Fish :(",
-                                                   "Time To Conquer This Planet FR"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "precursor",
-                                                 "LargeImageText": [
-                                                   "These Guys Sure Loved Green Huh?",
-                                                   "ALIENS???",
-                                                   "Hyper-Advanced Civilization Couldn't Survive A Small Virus LOL",
-                                                   "Architects? Okay Design Me A Home For Free Pls"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "unk",
-                                                 "LargeImageText": [
-                                                   "S@VE MEEE$$$",
-                                                   "... --- ...",
-                                                   ".-- .... --- / .- -- / .. ..--.."
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "prawn",
-                                                 "SmallImageText": [
-                                                   "SpiderMan With A Drill INCOMING!",
-                                                   "Yo Am I In Gundam??",
-                                                   "Drillin'",
-                                                   "The Prawn Suit: It's got you covered!",
-                                                   "Ordered The Prawn"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "seamoth",
-                                                 "SmallImageText": [
-                                                   "Reaper's Lunch",
-                                                   "Gotta Go Faster!",
-                                                   "The Seamoth: It goes anywhere but land.",
-                                                   "Personal Propulsion"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "archon",
-                                                 "SmallImageText": [
-                                                   "Rich People Be Like:-",
-                                                   "I Am The Archon Of Eternity!",
-                                                   "Yoo That Map Is SICK!",
-                                                   "10/10 Submarine Hands Down FR"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "echelon",
-                                                 "SmallImageText": [
-                                                   "I Am SPEED!!",
-                                                   "I AM SPEED!!!!!!!!!!!",
-                                                   "Railgun!",
-                                                   "I Believe I Can Flyyyy"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "blossom",
-                                                 "SmallImageText": [
-                                                   "Come Closer~",
-                                                   "Swim Closer~~",
-                                                   "Hynotizing Entire Oceans",
-                                                   "Woah, Cool Headligh-..Where Am I...?"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "unkvehicle",
-                                                 "SmallImageText": [
-                                                   "What Is Bro Driving??",
-                                                   "Where's Ur Driving Licence??",
-                                                   "Goin' 300 In A School Zone"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "safeshallows_cave",
-                                                 "LargeImageText": [
-                                                   "Woah, A Red Fis- *EXPLODES*",
-                                                   "Crashfish Jump Scare Simulator",
-                                                   "STOP GIVING ME TITANIUM I WANT COPPER"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "kelpforest_cave",
-                                                 "LargeImageText": [
-                                                   "Eye Stalk U",
-                                                   "Mesmerized....",
-                                                   "Droop! Droop! That's The Sound Of The Stingers"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "bloodkelp_cave",
-                                                 "LargeImageText": [
-                                                   "BLOOD FOR THE BLOOD GOD",
-                                                   "Yoo These White Trees Are Cool!",
-                                                   "Crabsquids Huntin' Me~~~"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "kooshzone_cave",
-                                                 "LargeImageText": [
-                                                   "Don't Go In The Lava Vent Stoobid",
-                                                   "Bonesharks Literally Won't Leave My Seamoth Alone",
-                                                   "Amp Up The Eels!"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "mountains_cave",
-                                                 "LargeImageText": [
-                                                   "More Poisonous Tentacles!!?? Ah Shi-",
-                                                   "Reaper Roaring Echoes Down Here...",
-                                                   "If You Find Purple Tablets, R U N"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "mushroomforest_cave",
-                                                 "LargeImageText": [
-                                                   "CUDDLEFISH EGGGGGGGGGGGG",
-                                                   "Lost Inside A Giant Stalk..HELP",
-                                                   "Lithium Jackpot!!..If I Can Find My Way Back Out That Is..."
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "grandreef_cave",
-                                                 "LargeImageText": [
-                                                   "Is That URANIUM?? Call Nile Red",
-                                                   "Warper Warpin' Away~",
-                                                   "Ruby Ruby Ruby Ruby Ruby Ruby Ruby"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "grassyplateaus_cave",
-                                                 "LargeImageText": [
-                                                   "Why Are There Poisonous Tentacles!?",
-                                                   "Biters & Stingers... My Favorite Game Mechanics..",
-                                                   "Can I Just Mine My Gold In Peace Please?"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "seatreaderpath_cave",
-                                                 "LargeImageText": [
-                                                   "Walking Simulator: Tunnel Edition",
-                                                   "Underneath The Stomping Giants",
-                                                   "Yooo They Made A Tunnel? Coolll!!"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "unwaterislands_islandcave",
-                                                 "LargeImageText": [
-                                                   "I Go Under The Island",
-                                                   "Bone Sharks Waiting Right Outside The Exithole...",
-                                                   "OFC There's Tentacles Again..."
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "unwaterislands_cave",
-                                                 "LargeImageText": [
-                                                   "I Go Under The Island",
-                                                   "Bone Sharks Waiting Right Outside The Exithole...",
-                                                   "OFC There's Tentacles Again..."
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "lostriver_bonesfield",
-                                                 "LargeImageText": [
-                                                   "What If This Ancient Were To Return?",
-                                                   "Gargantuan Skull Looks Hungry Still...",
-                                                   "Juicing My PRAWN Suit Through Green Acid Pools",
-                                                   "It Would Truly Be A Return Of The Ancient If It Was Alive..."
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "dunes_cave",
-                                                 "LargeImageText": [
-                                                   "The Reapers Are Waiting.",
-                                                   "Hiding In A Hole From 8 Giant Worms",
-                                                   "The Scanning Room Says There's Danger Everywhere...HELP"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "sparsereef_deep",
-                                                 "LargeImageText": [
-                                                   "Homing Thistles HELP",
-                                                   "Literally Nothing Lives Here Except Anxiety",
-                                                   "Yoo Sonar Comin' In Clutch!"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "deepsparsereef",
-                                                 "LargeImageText": [
-                                                   "Homing Thistles HELP",
-                                                   "Literally Nothing Lives Here Except Anxiety",
-                                                   "Yoo Sonar Comin' In Clutch!"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "ilzcastle",
-                                                 "LargeImageText": [
-                                                   "A Thermal Plant Here Would Be Nic- Oh...",
-                                                   "Lava Lizard Spat On My Windshield",
-                                                   "Boomerang Is That U???"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "prison_aquarium",
-                                                 "LargeImageText": [
-                                                   "HOLY SHI- ITS THE EMPEROR OF THE SEA",
-                                                   "Pls Give Me The Enzyme",
-                                                   "Swimming With The Giant Psychic Grandma"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "crashzone_mesa",
-                                                 "LargeImageText": [
-                                                   "All Around Me Are Reaper Faces...",
-                                                   "One Wrong Turn Off This Hill And I Am Scrap Metal",
-                                                   "Mesa-ing Around Where I Shouldn't Be"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "deepgrandreef",
-                                                 "LargeImageText": [
-                                                   "Enemy EMP Inbound",
-                                                   "Degasi Crew Really Picked The Worst Real Estate",
-                                                   "Turn Off The Lights NOW"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "lostriver_tree",
-                                                 "LargeImageText": [
-                                                   "So Comfy :)",
-                                                   "The Only Safe Place Under 800 Meters",
-                                                   "Blue Brine > Green Goo",
-                                                   "Cove Tree Parking Zone",
-                                                   "Can I Have Those Ghosty Eggs Plz"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "safeshallows",
-                                                 "LargeImageText": [
-                                                   "YAY I AM SAFE (for now)",
-                                                   "Bullying Gasopods For Their Farts",
-                                                   "Eating Cooked Peepers For Breakfast, Lunch, And Dinner"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "kelpforest",
-                                                 "LargeImageText": [
-                                                   "Can Someone Tell Bro To Clean His Teeth...",
-                                                   "Stalker Stole My Scanner Room Camera Again",
-                                                   "Harvesting Seed Clusters For That Sweet, Sweet Lubricant",
-                                                   "Even The Seaweed Plotting Against Me Here Bro"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "bloodkelp",
-                                                 "LargeImageText": [
-                                                   "Mr. Crabs? OH SHI ITS AN EMP-",
-                                                   "WTH There's Crabs On The Ground Here Too??",
-                                                   "Ghostly Vines And Bad Vibes"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "kooshzone",
-                                                 "LargeImageText": [
-                                                   "Amp Up The Eels!",
-                                                   "Boneshark Please Leave My Seamoth Alone!",
-                                                   "Free Electricity! (Warning: Hurts A Lot)"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "cragfield",
-                                                 "LargeImageText": [
-                                                   "There's A Shark In My Bones",
-                                                   "Who's Craig Tho?",
-                                                   "Most Forgotten Biome In History"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "crashzone",
-                                                 "LargeImageText": [
-                                                   "Why's The Water So Murky- HOLY SHI-",
-                                                   "Sammy The Safety Reaper Wants A Hug",
-                                                   "Radiation Suit Fashion Show",
-                                                   "Yo Why Do I Hear A Loud Roar, OH SHI-"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "void",
-                                                 "LargeImageText": [
-                                                   "Warning! Entering Ecological Dead Zone...",
-                                                   "Phew! Atleast The Garg's Long Dead, Wait Wdym There's A Mod-..AHHHHHH",
-                                                   "Two Adult Ghosts Want To Know Your Location!"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "dunes",
-                                                 "LargeImageText": [
-                                                   "Detecting Multiple Leviathan Class Lifeforms Nearby..YOU'RE COOKED",
-                                                   "Mom...There's 8 Reaper's On Me I Am Scared...",
-                                                   "My Seamoth Is Sweating...",
-                                                   "Leviathan Class Lifeforms? Nah I'd Win-..Nvm..RUNNNNN"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "grandreef",
-                                                 "LargeImageText": [
-                                                   "Wait, WHY'S THERE A GHOS- %%$$##$%Q$",
-                                                   "Spamming Perimeter Defense System Like Crazy RN",
-                                                   "Nice Glowing Balls U Got There"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "grassyplateaus",
-                                                 "LargeImageText": [
-                                                   "Yay, I love reefies :)",
-                                                   "Sandsharks Practicing Their Intermediate Tunneling Skills",
-                                                   "Yo Yo Why's The Sandshark Tweakin' Like That"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "mountains",
-                                                 "LargeImageText": [
-                                                   "I-Is That An Island!??",
-                                                   "Yo Why This Gun Aiming At Me...",
-                                                   "I Hear A Reaper..."
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "mushroomforest",
-                                                 "LargeImageText": [
-                                                   "Dam Das A Lotta Trees..Or Mushrooms Ig",
-                                                   "Jelly Jelly Jelly Rays Rays Rays",
-                                                   "Cyclops Fragments Hunting Simulator"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "seatreaderpath",
-                                                 "LargeImageText": [
-                                                   "Walking Simulator",
-                                                   "Infinite Diamond Glitch",
-                                                   "Yo Why My Rifle Not Workin' On These Guys!?"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "sparsereef",
-                                                 "LargeImageText": [
-                                                   "I Hate Tiger Plants",
-                                                   "Why Does The Music Have Trump Saying 'China' LMAO",
-                                                   "Eye Stalk U Part 2"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "underwaterislands",
-                                                 "LargeImageText": [
-                                                   "Are They Really Islands If They're Underwater?",
-                                                   "Buoyancy Algorithms Running Wild",
-                                                   "Bone Sharks Treating My Ship Like A Chew Toy BRUH"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "floatingisland",
-                                                 "LargeImageText": [
-                                                   "It's An Island...That's Floating",
-                                                   "Marblemelon Theft Operation MUAHHAHAHAH",
-                                                   "Degasi Really Findin' The Weirdest Places To Make Habitats In"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "lostriver",
-                                                 "LargeImageText": [
-                                                   "Mom...Dad...This Is Scary...",
-                                                   "Sailing A Massive Sub Through A Tiny Green Cave",
-                                                   "Aliens Really REALLY Loved Green Huh.."
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "ilz",
-                                                 "LargeImageText": [
-                                                   "There Are Dragons In This Game!?",
-                                                   "Knock Knock It's The Sea Dragon",
-                                                   "It's Over Anakin, I Have The Cyclops Thermal Reactor",
-                                                   "Stop Spitting Fire On My Windshield Bro!"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "jellyshroomcaves",
-                                                 "LargeImageText": [
-                                                   "Can I Eat The Jelly?",
-                                                   "Crabsnake Pop-up Surprise",
-                                                   "Degasi Again?? Y'all Really Don't Have A Single Good Location??"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "lavalakes",
-                                                 "LargeImageText": [
-                                                   "Kinda Hot In Here Don't You Think?",
-                                                   "Deepest Depths Of Hell",
-                                                   "Yo What If I Step In the Lav-..AHHHHHH MY FEET"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "prison",
-                                                 "LargeImageText": [
-                                                   "This Is Where They Locked My Boy John Up",
-                                                   "Yo It's Free Ion Cube Real Estate",
-                                                   "THEY HAD A SWORD??"
-                                                 ]
-                                               },
-                                               {
-                                                 "Name": "unkbiome",
-                                                 "LargeImageText": [
-                                                   "I C@N H$@R TH$IR V0IC$E$$",
-                                                   "WHY D0E$ L1FE SLUMBER?",
-                                                   "I F0RG0T MY N@ME, IT DIDN'T"
-                                                 ]
-                                               }
-                                             ]
-                                           }
-                                           """;
-
-    #endregion
+    private const string CurrentVersion = "1.1.5";
 
     private static readonly string FolderPath = Path.Combine(Paths.ConfigPath, "SubnauticaRP");
-    private static readonly string FilePath = Path.Combine(FolderPath, "hoverTexts.json");
     private static readonly Random Random = new();
 
     private static readonly JsonSerializerSettings Settings = new()
@@ -541,6 +22,8 @@ public static class HoverMap
     };
 
     private static HoverRoot _loadedRoot;
+    private static string _currentLoadedFile;
+    private static string _activeLanguage = "English";
 
     static HoverMap()
     {
@@ -553,22 +36,33 @@ public static class HoverMap
         {
             if (!Directory.Exists(FolderPath)) Directory.CreateDirectory(FolderPath);
 
-            if (!File.Exists(FilePath))
+            _activeLanguage = Language.main.GetCurrentLanguage() ?? "English";
+
+            var fileName = _activeLanguage.Equals("English", StringComparison.OrdinalIgnoreCase)
+                ? "hoverTexts.json"
+                : $"hoverTexts_{_activeLanguage}.json";
+
+            _currentLoadedFile = Path.Combine(FolderPath, fileName);
+
+            if (!File.Exists(_currentLoadedFile))
             {
-                Plugin.Logger.LogWarning("hoverTexts.json Not Found! Creating Default...");
+                Plugin.Logger.LogWarning($"{fileName} Not Found! Using Defaults...");
                 _loadedRoot = GetDefaultRoot();
                 Save();
                 return;
             }
 
-            var json = File.ReadAllText(FilePath);
+            var json = File.ReadAllText(_currentLoadedFile);
             _loadedRoot = JsonConvert.DeserializeObject<HoverRoot>(json, Settings);
 
             if (_loadedRoot is not null && _loadedRoot.Version != CurrentVersion)
             {
                 Plugin.Logger.LogInfo(
-                    $"Hover Text File Version Mismatch ({_loadedRoot.Version} -> {CurrentVersion}). Merging updates...");
-                MergeDefaultData();
+                    $"Hover Text File Version Mismatch ({_loadedRoot.Version} -> {CurrentVersion}). Merging Updates...");
+
+                // Only Merge If English
+                if (_activeLanguage == "English") MergeDefaultData();
+
                 _loadedRoot.Version = CurrentVersion;
                 Save();
             }
@@ -583,41 +77,66 @@ public static class HoverMap
     [SuppressMessage("ReSharper", "ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator")]
     private static void MergeDefaultData()
     {
-        var defaults = GetDefaultRoot();
+        var oldDefaults = GetOldDefaultRoot();
+        var newDefaults = GetDefaultRoot();
 
-        foreach (var defaultProfile in defaults.Data)
+        foreach (var newProfile in newDefaults.Data)
         {
-            var existingProfile =
-                _loadedRoot.Data.Find(p => p.Name.Equals(defaultProfile.Name, StringComparison.OrdinalIgnoreCase));
+            var userProfile =
+                _loadedRoot.Data.Find(p => p.Name.Equals(newProfile.Name, StringComparison.OrdinalIgnoreCase));
+            var oldProfile =
+                oldDefaults.Data.Find(p => p.Name.Equals(newProfile.Name, StringComparison.OrdinalIgnoreCase));
 
-            if (existingProfile == null)
+            if (userProfile == null)
             {
                 // Add New Category As Whole
-                _loadedRoot.Data.Add(defaultProfile);
+                _loadedRoot.Data.Add(newProfile);
+                continue;
             }
-            else
-            {
-                // Category Exists, Merge Changes
-                if (defaultProfile.LargeImageText != null)
-                {
-                    existingProfile.LargeImageText ??= new List<string>();
 
-                    foreach (var text in defaultProfile.LargeImageText)
-                        // Clean, vanilla loop check. No lambdas, no HashSets.
-                        if (!existingProfile.LargeImageText.Contains(text))
-                            existingProfile.LargeImageText.Add(text);
-                }
+            userProfile.LargeImageText = ProcessListMerge(
+                userProfile.LargeImageText,
+                oldProfile?.LargeImageText ?? new List<string>(),
+                newProfile.LargeImageText ?? new List<string>()
+            );
 
-                if (defaultProfile.SmallImageText != null)
-                {
-                    existingProfile.SmallImageText ??= new List<string>();
-
-                    foreach (var text in defaultProfile.SmallImageText)
-                        if (!existingProfile.SmallImageText.Contains(text))
-                            existingProfile.SmallImageText.Add(text);
-                }
-            }
+            userProfile.SmallImageText = ProcessListMerge(
+                userProfile.SmallImageText,
+                oldProfile?.SmallImageText ?? new List<string>(),
+                newProfile.SmallImageText ?? new List<string>()
+            );
         }
+    }
+
+    [CanBeNull]
+    private static List<string> ProcessListMerge([CanBeNull] List<string> userList, List<string> oldDefaultList,
+        List<string> newDefaultList)
+    {
+        // The User Didn't Want This One
+        if (userList is null) return null;
+
+        var userSet = new HashSet<string>(userList);
+        var oldSet = new HashSet<string>(oldDefaultList);
+        var newSet = new HashSet<string>(newDefaultList);
+
+        var resultList = new List<string>();
+
+        // Ok, Ok So For Each Entry In The User's File
+        foreach (var text in userSet)
+            // I Check If It's An Entry That I Have Already Done Or Added, If Yes Then Stay There
+            if (newSet.Contains(text))
+                resultList.Add(text);
+            // I Check If It's A User Specific Entry Which Ain't In Old Stuff 
+            else if (!oldSet.Contains(text)) resultList.Add(text);
+
+        // If It's Missing In The New Stuff But Was In The Old Stuff Then It's Removed By Me So Who Cares
+
+        // Inject Any New Stuff I Did
+        foreach (var text in newSet)
+            if (!oldSet.Contains(text) && !userSet.Contains(text))
+                resultList.Add(text);
+
+        return resultList;
     }
 
     private static void Save()
@@ -625,7 +144,7 @@ public static class HoverMap
         try
         {
             var json = JsonConvert.SerializeObject(_loadedRoot, Settings);
-            File.WriteAllText(FilePath, json);
+            File.WriteAllText(_currentLoadedFile, json);
         }
         catch (Exception e)
         {
@@ -633,9 +152,19 @@ public static class HoverMap
         }
     }
 
+    private static void CheckActiveLanguage()
+    {
+        var currentLang = Language.main.GetCurrentLanguage() ?? "English";
+
+        if (!currentLang.Equals(_activeLanguage,
+                StringComparison.OrdinalIgnoreCase)) Initialize(); // Hot Reload This Gun
+    }
+
     [CanBeNull]
     public static string GetRandomL(string name)
     {
+        CheckActiveLanguage();
+
         var profile = _loadedRoot?.Data?.Find(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         if (profile?.LargeImageText == null || profile.LargeImageText.Count == 0) return null;
 
@@ -645,15 +174,22 @@ public static class HoverMap
     [CanBeNull]
     public static string GetRandomS(string name)
     {
+        CheckActiveLanguage();
+
         var profile = _loadedRoot?.Data?.Find(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         if (profile?.SmallImageText == null || profile.SmallImageText.Count == 0) return null;
 
         return profile.SmallImageText[Random.Next(profile.SmallImageText.Count)];
     }
 
+    // These Two Should Never Be Null Lel
     private static HoverRoot GetDefaultRoot()
     {
-        return JsonConvert.DeserializeObject<HoverRoot>(DefaultDataTemp, Settings) ??
-               new HoverRoot { Version = CurrentVersion };
+        return JsonConvert.DeserializeObject<HoverRoot>(HoverConsts.NewDefault, Settings)!;
+    }
+
+    private static HoverRoot GetOldDefaultRoot()
+    {
+        return JsonConvert.DeserializeObject<HoverRoot>(HoverConsts.OldDefault, Settings)!;
     }
 }

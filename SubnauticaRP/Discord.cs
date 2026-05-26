@@ -66,12 +66,8 @@ public class Discord
         {
             _client.SetPresence(new RichPresence
             {
-                Details = "In Main Menu",
-                State = "Thinking About Life Choices...",
-                Assets = new Assets
-                {
-                    LargeImageText = "Press Play Already!"
-                },
+                Details = Language.main.Get("MainMenu_Details"),
+                State = Language.main.Get("MainMenu_State"),
                 Timestamps = _sessionTime
             });
             _hasPresence = true;
@@ -96,8 +92,8 @@ public class Discord
             // Observatory Is A Biome...For Some Reason??
             if (Player.main.GetCurrentSub().isBase && Player.main.GetBiomeString().ToLower() != "observatory")
             {
-                presence.Details = "In A Base";
-                presence.State = $"Chilling At {Player.main.cachedDepth}m";
+                presence.Details = Language.main.Get("Base_Details");
+                presence.State = Language.main.Get("Base_State").Replace("{depth}", Player.main.cachedDepth.ToString());
                 if (!addedSmallImage)
                 {
                     presence.Assets.SmallImageKey = "room";
@@ -112,7 +108,7 @@ public class Discord
                     presence.Assets.SmallImageText = GetRandomS("cyclops");
                 }
 
-                presence.State = VehicleState("Cyclops");
+                presence.State = VehicleState(Language.main.Get("Cyclops_Vehicle"));
             }
         }
         else if (!Player.main.isUnderwater.value && (Player.main.motorMode == Player.MotorMode.Walk ||
@@ -120,7 +116,7 @@ public class Discord
                                                      Player.MotorMode
                                                          .Run)) // I Won't Check Mech Cuz I Think It Should Be Caught Already
         {
-            presence.State = "Walking Across The Mountains";
+            presence.State = Language.main.Get("Land_State");
             if (!addedSmallImage)
             {
                 presence.Assets.SmallImageKey = "fins";
@@ -131,7 +127,8 @@ public class Discord
         {
             if (Player.main.motorMode == Player.MotorMode.Seaglide)
             {
-                presence.State = $"Seagliding Across The Sea At {Player.main.cachedDepth}m";
+                presence.State = Language.main.Get("Seaglide_State")
+                    .Replace("{depth}", Player.main.cachedDepth.ToString());
                 if (!addedSmallImage)
                 {
                     presence.Assets.SmallImageKey = "seaglide";
@@ -140,7 +137,7 @@ public class Discord
             }
             else
             {
-                presence.State = $"Swimming Across The Sea At {Player.main.cachedDepth}m";
+                presence.State = Language.main.Get("Swim_State").Replace("{depth}", Player.main.cachedDepth.ToString());
                 if (!addedSmallImage)
                 {
                     presence.Assets.SmallImageKey = "fins";
@@ -167,7 +164,7 @@ public class Discord
         {
             case "observatory": // if (ObservatoryAmbientSound.IsPlayerInObservatory()) { return "observatory"; }
             {
-                presence.Details = "Observing The World";
+                presence.Details = Language.main.Get("Observatory_Details");
                 presence.Assets.LargeImageKey = "observatory";
                 presence.Assets.LargeImageText = GetRandomL("observe");
                 presence.Assets.SmallImageKey = "eyes";
@@ -177,7 +174,7 @@ public class Discord
             case "generatorroom"
                 : // if (GeneratorRoomAmbientSound.main && GeneratorRoomAmbientSound.main.isPlayerInside) { return "generatorRoom"; }
             {
-                presence.Details = "Fixing The Aurora";
+                presence.Details = Language.main.Get("Aurora_Drive_Room_Details");
                 presence.Assets.LargeImageKey = "aurora";
                 presence.Assets.LargeImageText = GetRandomL("genroom");
                 return false;
@@ -185,14 +182,14 @@ public class Discord
             case "crashedship"
                 : // if (CrashedShipAmbientSound.main && CrashedShipAmbientSound.main.isPlayerInside) { return "crashedShip"; }
             {
-                presence.Details = "Exploring The Aurora";
+                presence.Details = Language.main.Get("Aurora_Explore_Details");
                 presence.Assets.LargeImageKey = "aurora";
                 presence.Assets.LargeImageText = GetRandomL("aurora");
                 return false;
             }
             case "lifepod":
             {
-                presence.Details = "Chilling In The Lifepod";
+                presence.Details = Language.main.Get("Lifepod_Details");
                 presence.Assets.LargeImageKey = "lifepod";
                 presence.Assets.LargeImageText = GetRandomL("lifepod");
                 presence.Assets.SmallImageKey = "room";
@@ -201,7 +198,7 @@ public class Discord
             }
             case "precursor":
             {
-                presence.Details = "At A Precursor Facility";
+                presence.Details = Language.main.Get("Precursor_Details");
                 presence.Assets.LargeImageKey = "precursor";
                 presence.Assets.LargeImageText = GetRandomL("precursor");
                 return false;
@@ -210,7 +207,7 @@ public class Discord
             case "unassigned":
             case "":
             {
-                presence.Details = BiomeDetails("Exploring An Unknown Biome...");
+                presence.Details = Language.main.Get("UnknownBiome_Details");
                 presence.Assets.LargeImageKey = "unknown";
                 presence.Assets.LargeImageText = GetRandomL("unk");
                 return false;
@@ -232,15 +229,18 @@ public class Discord
     private static string VehicleState(string vehicle)
     {
         return Player.main.isPiloting
-            ? $"Piloting The {vehicle} At {Player.main.cachedDepth}m"
-            : $"Chilling In {vehicle} At {Player.main.cachedDepth}m";
+            ? Language.main.Get("Vehicle_Piloting_State").Replace("{vehicle}", vehicle)
+                .Replace("{depth}", Player.main.cachedDepth.ToString())
+            : Language.main.Get("Vehicle_Chilling_State").Replace("{vehicle}", vehicle)
+                .Replace("{depth}", Player.main.cachedDepth.ToString());
     }
 
     private static string BiomeDetails(string biomeString, bool deep = false)
     {
-        if (deep && Plugin.ModConfig.EnableDeepDepths) return $"Exploring The {biomeString} Of The Deep Depths";
+        if (deep && Plugin.ModConfig.EnableDeepDepths)
+            return Language.main.Get("Biome_Deep_Details").Replace("{biome}", biomeString);
 
-        return $"Exploring The {biomeString}";
+        return Language.main.Get("Biome_Details").Replace("{biome}", biomeString);
     }
 
     public void Shutdown()

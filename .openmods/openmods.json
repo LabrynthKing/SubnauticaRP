@@ -1,0 +1,97 @@
+{
+  "$schema": "https://openmods.net/manifest.schema.json",
+  "schemaVersion": 2,
+  
+  "slug": "srp",
+  "name": "SRP (Subnautica Rich Presence)",
+  "supportedGameId": "subnautica",
+  
+  "releaseAssets": ["SRP-v*.zip"],
+  "primaryAsset": "SRP-v*.zip",
+  
+  "readme": "/README.md",
+  "thumbnail": "srp.png",
+  
+  "media": [
+    {
+      "type": "image",
+      "url": "discord1.png",
+      "label": "Example 1:-"
+    },
+    {
+      "type": "image",
+      "url": "discord2.png",
+      "label": "Example 2:-"
+    },
+    {
+      "type": "image",
+      "url": "discord3.png",
+      "label": "Example 3:-"
+    },
+    {
+      "type": "image",
+      "url": "discord4.png",
+      "label": "Example 4:-"
+    },
+    {
+      "type": "image",
+      "url": "discord5.png",
+      "label": "Example 5:-"
+    },
+    {
+      "type": "image",
+      "url": "discord6.png",
+      "label": "Example 6:-"
+    },
+    {
+      "type": "image",
+      "url": "discord7.png",
+      "label": "Example 7:-"
+    },
+    {
+      "type": "image",
+      "url": "discord8.png",
+      "label": "Example 8:-"
+    },
+    {
+      "type": "image",
+      "url": "discord9.png",
+      "label": "Example 9:-"
+    },
+    {
+      "type": "image",
+      "url": "discord10.png",
+      "label": "Example 10:-"
+    },
+    {
+      "type": "image",
+      "url": "discord11.png",
+      "label": "Example 11:-"
+    },
+    {
+      "type": "image",
+      "url": "config.png",
+      "label": "Configuration"
+    }
+  ],
+
+  "faq": [
+    {
+      "question": "How Do I Install This Mod?",
+      "answer": "You Can Use Any Mod Manager Like OpenModsManager, Vortex, MO2 OR You Can Extract The Zip To Your Game Folder"
+    },
+  ],
+
+  "dependencies": {
+    "v1.0.0": [
+      {
+        "modId": 58,
+        "fromRelease": "v5.4.23-pack.3.1.0"
+      },
+      {
+        "modId": 30,
+        "fromRelease": "1.0.0-pre.50"
+      }
+    ]
+  }
+}

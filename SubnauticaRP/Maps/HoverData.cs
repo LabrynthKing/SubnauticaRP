@@ -6,8 +6,8 @@ namespace SubnauticaRP.Maps;
 public class HoverData
 {
     public string Name { get; set; } = string.Empty;
-    [CanBeNull] public List<string> LargeImageText { get; set; } = null;
-    [CanBeNull] public List<string> SmallImageText { get; set; } = null;
+    [CanBeNull] public List<string> LargeImageText { get; set; }
+    [CanBeNull] public List<string> SmallImageText { get; set; }
 }
 
 public class HoverRoot

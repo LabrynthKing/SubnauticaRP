@@ -1,5 +1,5 @@
 {
-  "Version": "1.1.5",
+  "Version": "1.1.6",
   "Data": [
     {
       "Name": "base",
@@ -111,7 +111,7 @@
       ]
     },
     {
-      "Name": "prawn",
+      "Name": "exosuit",
       "SmallImageText": [
         "SpiderMan With A Drill INCOMING!",
         "Yo Am I In Gundam??",

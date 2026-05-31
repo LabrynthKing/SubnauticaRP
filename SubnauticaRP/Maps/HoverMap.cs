@@ -10,7 +10,7 @@ namespace SubnauticaRP.Maps;
 
 public static class HoverMap
 {
-    private const string CurrentVersion = "1.1.5";
+    private const string CurrentVersion = "1.1.6";
 
     private static readonly string FolderPath = Path.Combine(Paths.ConfigPath, "SubnauticaRP");
     private static readonly Random Random = new();

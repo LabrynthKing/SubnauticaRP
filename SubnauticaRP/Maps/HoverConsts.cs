@@ -5,7 +5,7 @@ public static class HoverConsts
 {
     public const string OldDefault = """
                                      {
-                                       "Version": "1.1.0",
+                                       "Version": "1.1.5",
                                        "Data": [
                                          {
                                            "Name": "base",
@@ -519,7 +519,7 @@ public static class HoverConsts
 
     public const string NewDefault = """
                                      {
-                                       "Version": "1.1.5",
+                                       "Version": "1.1.6",
                                        "Data": [
                                          {
                                            "Name": "base",
@@ -631,7 +631,7 @@ public static class HoverConsts
                                            ]
                                          },
                                          {
-                                           "Name": "prawn",
+                                           "Name": "exosuit",
                                            "SmallImageText": [
                                              "SpiderMan With A Drill INCOMING!",
                                              "Yo Am I In Gundam??",

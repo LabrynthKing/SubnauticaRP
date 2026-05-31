@@ -1,4 +1,4 @@
-<img src="Assets/srpthumbnail.png" alt="Hi I Am John Subnautica">
+<img src=".openmods/media/srp.png" alt="Hi I Am John Subnautica">
 
 # SRP (Subnautica Rich Presence)
 
